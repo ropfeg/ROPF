@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='icon' href='../static/img/favicon.ico' type='image/x-icon' />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    
+    <title>RO - Site Site History</title>
+
+</head>
+
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <nav class="navbar navbar-dark bg-dark">
+                    <a class="navbar-brand" href="http://10.231.224.81:8000/main_man/">RO PLATFORM</a>
+                    <div class="spinner-border text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="">
+                        <h3 style="color: white">Site History</h3>
+                    </div>
+                    
+                    <form class="form-inline">
+                        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+                        <a href="https://web.vodafone.com.eg/en/home" target="_blank"><img src="../static/img/logo.png" width="60" height="45" class="d-inline-block align-top" alt="vf"></a>
+                    </form>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!--nav bar End-->
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!--Main Row which is the full screen container-->
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <!--------------Side Menu START-------------->
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action" disabled>Welcome {{username}}</button>
+                    <button type="button" onclick="window.location.href='/dashboard/'" class="list-group-item list-group-item-action"
+                        disabled>Dashboard</button>
+                    <button type="button" onclick="window.location.href='/query/'" class="list-group-item list-group-item-action"
+                        disabled>Query</button>
+                    <button type="button" onclick="window.location.href='/tp/'" class="list-group-item list-group-item-action"
+                        disabled>Technical Plan</button>
+                    <button type="button" onclick="window.location.href='/int_quota/'" class="list-group-item list-group-item-action"
+                        disabled>Integration Quota</button>
+                    <button type="button" onclick="window.location.href='/site_history/'"
+                        class="list-group-item list-group-item-action active"><strong>Site History</strong></button>
+                    <button type="button" onclick="window.location.href='/contract_renegotiation/'"
+                        class="list-group-item list-group-item-action">Contract Renegotiation</button>
+                    <button type="button" onclick="window.location.href='/site_continuity_risk/'"
+                        class="list-group-item list-group-item-action">Site Continuity</button>
+                    <button type="button" onclick="window.location.href='/pki/'" class="list-group-item list-group-item-action">PKI
+                        Search/Add</button>
+                    <button type="button" onclick="window.location.href='/scl/'" class="list-group-item list-group-item-action"
+                        disabled>Smart Check-List</button>
+                    <button type="button" onclick="window.location.href='/cont_eval/'" class="list-group-item list-group-item-action"
+                        disabled>Contractor Evaluation</button>
+                    <button type="button" onclick="window.location.href='/cont_alloc/'" class="list-group-item list-group-item-action"
+                        disabled>Contractor Allocation</button>
+                    <button type="button" onclick="window.location.href='/field_plan/'" class="list-group-item list-group-item-action"
+                        disabled>Field Planning</button>
+                    <button type="button" onclick="window.location.href='/rca_acc/'" class="list-group-item list-group-item-action"
+                        disabled>RCA Acceptance</button>
+                    <button type="button" onclick="window.location.href='/rca_nfm/'" class="list-group-item list-group-item-action"
+                        disabled>RCA NFM</button>
+                    <button type="button" onclick="window.location.href='/civ_tech_off/'" class="list-group-item list-group-item-action"
+                        disabled>Civil Technical Office</button>
+                    <button type="button" onclick="window.location.href='/uni_pwr/'" class="list-group-item list-group-item-action" disabled>Unified PWR DB</button>
+                </div>
+                <!--------------Side Menu END-------------->
+            </div>
+            <div class="col-sm-10">
+                <!-----------Core Content START------------>
+                
+                    <div class="row">
+                            <div class="col-sm-8">
+                                <br>
+                                <button type="button" onclick="location.href='/civil_info/'" class="btn btn-danger btn-lg btn-block">Civil Site History</button><br>
+                                <button type="button" onclick="location.href='/power_info/'" class="btn btn-danger btn-lg btn-block">Power Site History</button>
+                            </div>
+                            <div class="col-sm-4">
+                                
+                            </div>
+                    </div>
+
+                <!-----------Core Content END------------>
+            </div>
+            <!--core content End-->
+        </div>
+    </div>
+    
+    <!--full screen container END-->
+
+    <!-- Optional JavaScript -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    
+    <!--custom jquery-->
+    
+    <script src="../static/jquery/jquery.js"></script>
+    <script>
+        $(window).on("load", function () {
+            $(".spinner-border").fadeOut("slow")
+        });
+    </script>
+
+    <!--custom jquery END-->
+
+</body>
+
+</html>

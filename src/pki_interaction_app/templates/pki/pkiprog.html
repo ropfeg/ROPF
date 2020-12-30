@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    
+    <title>PKI Tool</title>
+
+</head>
+
+<body>
+    
+    <div class="container-fluid">
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">RO PLATFORM</a>
+        <div class="">
+            <h3 style="color: white">PKI Search/Add Engine</h3>
+        </div>
+        
+        <form class="form-inline">
+            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Logout</button>
+            <a href="https://web.vodafone.com.eg/en/home" target="_blank"><img src="../img/logo.png" width="60" height="45" class="d-inline-block align-top" alt="vf"></a>
+        </form>
+    </nav>
+    </div>
+    
+    <!--nav bar End-->
+
+    <!--Main Row which is the full screen container-->
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+
+                <!--the row which holds the rest of the screen content (core content)-->
+                    <div class="col-2">
+                        <div class="container-fluid">
+                            <div class="list-group">
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Welcome {{username}}</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Dashboard</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Query</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Technical Plan</button>
+                                <button type="button" class="list-group-item list-group-item-action">Site History</button>
+                                <button type="button" class="list-group-item list-group-item-action">Contract Renegotiation</button>
+                                <button type="button" class="list-group-item list-group-item-action">Site Continuity</button>
+                                <button type="button" class="list-group-item list-group-item-action active">PKI Search/Add</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Smart Check-List</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Contractor Evaluation</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Contractor Allocation</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Field Planning</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>RCA Acceptance</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>RCA NFM</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Civil Technical Office</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Unified PWR DB</button>
+                                <button type="button" class="list-group-item list-group-item-action" disabled>Admin</button>
+                            </div>
+                        </div>
+                    </div>
+                
+                <!--core content section-->
+
+                <div class="col-10">
+                    <div class="container-fluid">
+                        <div class="row">
+
+
+                            <!--single search section-->
+                            {% if userprivileges in read %}
+                            <div class="col-6">
+                                <br>
+                                <h5>Search for a Single serial here:</h5><br>
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                                <button class="btn btn-outline-primary my-2 my-sm-2" type="submit">Search</button><br><br>
+                                <h5>Request to add Single serial here:</h5><br>
+                                <form class="box" action="" method="POST" enctype="multipart/form-data">	{% csrf_token %}
+                                <input class="form-control" type="text" name="site_id" placeholder="Site ID">
+                                <select class="form-control" name="vendor">
+                                    <option>Select Vendor</option>
+                                    <option>ericsson</option>
+                                    <option>huawei</option>
+                                </select>
+                                <input class="form-control" type="text" name="serial" placeholder="Serial No.">
+                                <input class="form-control" type="text" name="activity" placeholder="Activity">
+                                <select class="form-control"name="region">
+                                    <option>Select Region</option>
+                                    <option>Cairo</option>
+                                    <option>Giza</option>
+                                    <option>Delta</option>
+                                    <option>Alex</option>
+                                    <option>Upper</option>
+                                </select>
+                                <select class="form-control" name="function">
+                                    <option>Select Function</option>
+                                    <option>Rollout</option>
+                                    <option>Imp</option>
+                                    <option>IBS</option>
+                                    <option>L1</option>
+                                </select>
+                                <button class="btn btn-outline-primary my-2 my-sm-2" name="upload" type="submit">Request to Add</button>
+                                </form>
+                            </div>
+                            {% endif %}
+
+                            <!--batch search section-->
+                            {% if userprivileges in read_write %}
+                            <div class="col-6">
+                                <form method="post" enctype="multipart/form-data"> {% csrf_token %}
+                                <br>
+                                <h5>Batch Search & and Request serial addition here:</h5><br>
+
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="myfile" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                                        <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                                    </div>
+                                </div>
+                                <button name= "batch_upload" class="btn btn-outline-primary my-2 my-sm-2" type="submit">Upload</button>
+                                <a href="../static/Sample_Template/PKI_template.xlsx" class="btn btn-outline-primary my-2 my-sm-2" >Download Template</a>
+                                </form>
+                            </div>
+                            {% endif%}
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!--core content End-->
+    
+    </div>
+    
+    <!--full screen container End-->
+
+
+
+    <!-- Optional JavaScript -->
+    <script src="../js/scripts.js"></script>
+
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

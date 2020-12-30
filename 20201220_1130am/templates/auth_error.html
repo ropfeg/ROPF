@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='icon' href='../static/img/favicon.ico' type='image/x-icon' />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    
+    <title>RO Welcome</title>
+
+</head>
+
+<body>
+    
+    <div class="container-fluid">
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/welcome/">RO PLATFORM</a>
+            <div class="spinner-border text-light" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            
+            <form class="form-inline">
+                <button onclick="window.location.href='/logout/'" name="logout" class="btn btn-outline-warning my-2 my-sm-0" type="button">Logout</button>
+                <a href="https://web.vodafone.com.eg/en/home" target="_blank"><img src="../static/img/logo.png" width="60" height="45" class="d-inline-block align-top" alt="vf"></a>
+            </form>
+        </nav>
+    </div>
+    
+    <!--nav bar End-->
+
+
+    <!--Main Row which is the full screen container-->
+    
+    <div class="row">
+        <div class="col-12">
+
+            <!--the row which holds the rest of the screen content (core content)-->
+            
+            <div class="row">
+                <div class="col-2">
+                    <div class="container-fluid">
+                        <div class="list-group">
+                            <button type="button" class="list-group-item list-group-item-action" disabled>Welcome {{username}}</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Dashboard</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Query</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Technical Plan</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Integration Quota</button>
+                            <button type="button" onclick="window.location.href='/site_history/'" class="list-group-item list-group-item-action">Site History</button>
+                            <button type="button" onclick="window.location.href='/contract_renegotiation/'" class="list-group-item list-group-item-action">Contract Renegotiation</button>
+                            <button type="button" onclick="window.location.href='/site_continuity_risk/'" class="list-group-item list-group-item-action">Site Continuity</button>
+                            <button type="button" onclick="window.location.href='/pki/'" class="list-group-item list-group-item-action">PKI Search/Add</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Smart Check-List</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Contractor Evaluation</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Contractor Allocation</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Field Planning</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">RCA Acceptance</button>
+                            <button type="button" onclick="window.location.href='/nfm_crca/'" class="list-group-item list-group-item-action">RCA NFM</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Civil Technical Office</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Unified PWR DB</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!--core content section-->
+
+                <div class="col-10">
+                    
+                    <div class="row">
+                        <div class="col-10">
+                            <br><br><br><br>
+                    
+                            <div class="alert alert-warning" role="alert">
+                                <h4 class="alert-heading">Access Denied!</h4>
+                                <p>Sorry, your username is not authorized to access this page, please refer to your manager or system admin for support through below button.</p>
+                                <hr>
+                                <a class="btn btn-secondary text-white" href="mailto:ro.robot1@vodafone.com?Subject=RO%20Platform%20Support">Contact Us</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            
+            </div>
+        </div>
+        
+        <!--core content End-->
+    
+    </div>
+
+    <!--<div class="container-fluid">
+        <nav class="navbar navbar-dark bg-danger">
+            <h6 style="color: white">RO Development Team.</h6>
+        </nav>
+    </div>-->
+    
+    <!--full screen container END-->
+
+    <!-- Optional JavaScript -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    
+    <!--custom jquery-->
+    
+    <script src="../static/jquery/jquery.js"></script>
+    <script>
+        $(window).on("load", function () {
+            $(".spinner-border").fadeOut("slow")
+        });
+    </script>
+
+    <!--custom jquery END-->
+
+</body>
+
+</html>

@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='icon' href='../static/img/favicon.ico' type='image/x-icon' />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <title>NFM CRCA</title>
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/welcome/">RO PLATFORM</a>
+            <div class="spinner-border text-light" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="">
+                <h3 style="color: white">Customized RCA NFM</h3>
+            </div>
+
+            <form class="form-inline">
+                <button onclick="window.location.href='/logout/'" name="logout" class="btn btn-outline-warning my-2 my-sm-0" type="button">Logout</button>
+                <a href="https://web.vodafone.com.eg/en/home" target="_blank"><img src="../static/img/logo.png" width="60" height="45" class="d-inline-block align-top" alt="vf"></a>
+            </form>
+        </nav>
+    </div>
+
+    <!--nav bar End-->
+
+
+    <!--Main Row which is the full screen container-->
+
+    <div class="row">
+        <div class="col-12">
+
+            <!--the row which holds the rest of the screen content (core content)-->
+
+            <div class="row">
+                <div class="col-2">
+                    <div class="container-fluid">
+                        <div class="list-group">
+                            <button type="button" class="list-group-item list-group-item-action" disabled>Welcome {{username}}</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Dashboard</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Query</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Technical Plan</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Integration Quota</button>
+                            <button type="button" onclick="window.location.href='/site_history/'" class="list-group-item list-group-item-action">Site History</button>
+                            <button type="button" onclick="window.location.href='/contract_renegotiation/'" class="list-group-item list-group-item-action">Contract Renegotiation</button>
+                            <button type="button" onclick="window.location.href='/site_continuity_risk/'" class="list-group-item list-group-item-action">Site Continuity</button>
+                            <button type="button" onclick="window.location.href='/pki/'" class="list-group-item list-group-item-action">PKI Search/Add</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Smart Check-List</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Contractor Evaluation</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Contractor Allocation</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Field Planning</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">RCA Acceptance</button>
+                            <button type="button" onclick="window.location.href='/nfm_crca/'" class="list-group-item list-group-item-action active"><strong>RCA NFM</strong></button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Civil Technical Office</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Unified PWR DB</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--core content section-->
+
+                <div class="col-10">
+
+                    <div class="row">
+
+                        <!--left section-->
+
+                        <div class="col-5">
+                            <br>
+
+                            <h5>Data Preparation</h5><br>
+
+                            
+                            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input name="raw_data" type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01" accept="excel" required>
+                                    <label class="custom-file-label" for="inputGroupFile01">Select Raw-Data file</label>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input name="back_up_time" type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01" accept="excel" required>
+                                    <label class="custom-file-label" for="inputGroupFile01">Select Back-up time file</label>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary" name="Start_prep" type="submit" id="upload_btn7" {% if read_only == 'yes' %}disabled {% endif %}>Start Analysis</button>
+
+                            <br><br>
+                                {% if code == "success" %}
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Last Run Date: {{last_date}}"
+                                    aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
+                                <div class="input-group-append">
+                                    <a class="btn btn-primary" href="{{last_modified_nfm}}"
+                                        id="button-addon2">Download Last NFM Run</a>
+                                </div>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control outline-primary" placeholder="Last Run Date: {{last_date}}"
+                                    aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
+                                <div class="input-group-append">
+                                    <a class="btn btn-primary" href="{{last_modified_sm}}"
+                                        id="button-addon2">Download Last SM Run</a>
+                                </div>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control outline-primary" placeholder="Last Run Date: {{last_date}}"
+                                    aria-label="Recipient's username" aria-describedby="button-addon2" disabled>
+                                <div class="input-group-append">
+                                    <a class="btn btn-primary" href="{{missing_criteria}}"
+                                        id="button-addon2">Download Last Missing Criteria </a>
+                                </div>
+                            </div>
+                            
+                            </form>
+
+
+                            <!--success msg-->
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong>Success!</strong> Analysis ready, please download needed report type from below buttons.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endif  %}
+
+                            {% if sheet_name == "not_exist" %}
+                            <!--Wrong file import-->
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Error!</strong> The file you are trying to import is not matching destination
+                                criteria.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endif  %}
+
+                        </div>
+
+                        <!--left END-->
+
+                        <!--right section-->
+                        
+                        
+
+                        <div class="col-5 ml-5">
+                            
+                            {% if userprivileges in cru %}
+                            <br>
+                            <h5>Database Update</h5><br>
+                            
+                            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input name="gaurd_list" type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01" accept="excel">
+                                    <label class="custom-file-label" for="inputGroupFile01">Select Gaurd List file</label>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input name="north_sinai" type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01" accept="excel">
+                                    <label class="custom-file-label" for="inputGroupFile01">Select North-Sinai List file</label>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input name="unified_pwr" type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01" accept="excel">
+                                    <label class="custom-file-label" for="inputGroupFile01">Select Unified Power Source file</label>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input name="radio_regional_db" type="file" class="custom-file-input" id="inputGroupFile01"
+                                        aria-describedby="inputGroupFileAddon01" accept="excel">
+                                    <label class="custom-file-label" for="inputGroupFile01">Select Radio Regional DB file</label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary" name="update_crcdb" type="submit">Update DB</button>
+                            </form>
+
+                            {% endif %}
+                            <!--right grid END-->
+
+                        
+
+                        </div>
+                        
+                        
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!--core content End-->
+
+    </div>
+
+    <!--<div class="container-fluid">
+        <nav class="navbar navbar-dark bg-danger">
+            <h6 style="color: white">RO Development Team.</h6>
+        </nav>
+    </div>-->
+
+    <!--full screen container END-->
+
+    <!--Font Awsome-->
+    <script src="https://kit.fontawesome.com/4eac5aef8d.js" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+
+    <script>
+        var progress = document.getElementById("progress")
+        var progress_wrapper = document.getElementById("progress_wrapper")
+        var progress_status = document.getElementById("progress_status")
+
+        var upload_btn = document.getElementById("upload_btn")
+        var loading_btn = document.getElementById("loading_btn")
+
+        var input = document.getElementById("file_input")
+        var file_input_label = document.getElementById("file_input_label")
+
+
+        function input_filename(){
+
+            file_input_label.innerText = input.files[0].name;
+        }
+
+        function upload() {
+            
+            var data = new FormData();
+            var Request = new XMLHttpRequest();
+            request.responseType = "json";
+            input.disabled = true;
+            upload_btn.classList.add("d-none");
+            loading_btn.classList.remove("d-none");
+            progress_wrapper.classList.remove("d-none");
+
+            var file = input.files[0];
+            var filename = file.name;
+            var filesize = file.size;
+            document.cookie = 'filesize=${filesize}';
+
+            data.append('file', file);
+
+            request.upload.addEventListner('progress', function(e){
+
+                var loaded = e.loaded;
+                var total = e.total;
+                                                            
+                var percentage_complete = (loaded / total) * 100;
+                            
+                progress.setAttribute("style", 'width: ${Math.floor(percentage_complete)}% uploaded');
+                progress_status.innerText = '${Math.floor(percentage_complete)}% uploaded';
+
+                }
+            )
+
+            reques.addEventListner("load", function (e) {
+                if(request.status == 200){
+                    show_alert('${request.response.message}', "success");
+
+                }
+
+                else {
+
+                    show_alert('${request.response.message}', "danger");
+
+                }
+
+                reset();
+                
+            })
+
+            request.addEventListner("error", function (e) {
+                reset();
+                show_alert("Error Uploading file", "danger");
+                
+            })
+
+            request.open("POST");
+            request.send(data);
+
+
+        } //End Upload
+
+        function reset() {
+
+            input.value = null;
+            loading_btn.classList.add("d-none");
+            upload_btn.classList.remove("d-none");
+            progress_wrapper.classList.add("d-none");
+            progress.setAttribute("style", "width: 0%");
+            file_input_label.innerText = "Select file";
+
+            
+        }
+
+
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src=""></script>
+
+    <!--custom jquery-->
+
+    <script src="../static/jquery/jquery.js"></script>
+    <script>
+        $(window).on("load", function() {
+            $(".spinner-border").fadeOut("slow")
+        });
+    </script>
+
+
+    <!--custom jquery END-->
+
+</body>
+
+</html>

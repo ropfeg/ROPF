@@ -1,0 +1,1036 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='icon' href='../static/img/favicon.ico' type='image/x-icon' />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <title>RO - Civil Tech-Office</title>
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <nav class="navbar navbar-dark bg-dark">
+                    <a class="navbar-brand" href="/welcome/">RO PLATFORM</a>
+                    <!-- <div class="spinner-border text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div> -->
+                    <div class="">
+                        <h3 style="color: white">Civil Technical Office</h3>
+                    </div>
+
+                    <form class="form-inline">
+                        <!--<img src="{{avatar}}" alt="Avatar" class="avatar mr-3" style="width: 50px; height: 50px; border-radius: 50%;">-->
+                        <button onclick="window.location.href='/logout/'" name="logout"
+                            class="btn btn-outline-warning my-2 my-sm-0" type="button">Logout</button>
+                        <a href="https://web.vodafone.com.eg/en/home" target="_blank"><img src="../static/img/logo.png"
+                                width="60" height="45" class="d-inline-block align-top" alt="vf"></a>
+                    </form>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!--nav bar End-->
+    <!--------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!--Main Row which is the full screen container-->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <!--------------Side Menu START-------------->
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action" disabled>Welcome
+                        {{username}}</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'"
+                        class="list-group-item list-group-item-action">Dashboard</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'"
+                        class="list-group-item list-group-item-action">Query</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'"
+                        class="list-group-item list-group-item-action">Technical Plan</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'"
+                        class="list-group-item list-group-item-action">Integration Quota</button>
+                    <button type="button" onclick="window.location.href='/site_history/'"
+                        class="list-group-item list-group-item-action">Site History</button>
+                    <button type="button" onclick="window.location.href='/contract_renegotiation/'"
+                        class="list-group-item list-group-item-action">Contract Renegotiation</button>
+                    <button type="button" onclick="window.location.href='/site_continuity_risk/'"
+                        class="list-group-item list-group-item-action">Site Continuity</button>
+                    <button type="button" onclick="window.location.href='/pki/'"
+                        class="list-group-item list-group-item-action">PKI Search/Add</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'"
+                        class="list-group-item list-group-item-action">Smart Check-List</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'"
+                        class="list-group-item list-group-item-action">Contractor Evaluation</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'"
+                        class="list-group-item list-group-item-action">Contractor Allocation</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'"
+                        class="list-group-item list-group-item-action">Field Planning</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'"
+                        class="list-group-item list-group-item-action">RCA Acceptance</button>
+                    <button type="button" onclick="window.location.href='/nfm_crca/'"
+                        class="list-group-item list-group-item-action">RCA NFM</button>
+                    <button type="button" onclick="window.location.href='/civil_tech/'"
+                        class="list-group-item list-group-item-action active"><strong>Civil Technical
+                            Office</strong></button>
+                    <button type="button" onclick="window.location.href='civil_tech'"
+                        class="list-group-item list-group-item-action">Unified PWR DB</button>
+                </div>
+                <!--------------Side Menu END-------------->
+            </div>
+            <div class="col-sm-10">
+                <!-----------Core Content START------------>
+                <h2 class="text-danger" id="errs"></h2>
+                {% if site_update == "yes" %} <!-- when a site is updated successfully >>> [update form]-->
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Site Updated Successfully.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if delete == "yes" %} <!-- in case user delete a site >>> [info form]-->
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Site deleted Successfully, please note that its not possible to retrive this record anymore.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if site_add == "yes" %} <!-- when user adds a new site >>> [add form]-->
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    Record Added Successfully.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if search_in_progress == "no" %}
+                <!-- in case user search for a site in the [update form] and site has no records that is [in-progress] then this alert appear >>> [update form] -->
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    This site maybe done, please search in info form.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if search_for_done == "no" %} <!-- in case user search for a site exist in DB and has zero done records >>> [info form] -->
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    This site has only 1 record with Status [In-Progress], please search for it in the update form.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <!--site id not done yet and still in-progress sesrch in the update form-->
+                {% endif %}
+
+                {% if site_exist == "no" %}
+                <!--in case user search for a site ID not found in all databases [info & update forms] -->
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    This site has no records.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                {% if wrong_wo_id == "yes" %}
+                <!--in case user search for a wrong WO number that dont exist in database >>> [info form] -->
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    This WorkOrder number doesn't exist, please make sure you are entering a correct WO number.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                {% endif %}
+
+                <!--{% if site_and_wo_id_existence_error %}
+                <H1>{{site_and_wo_id_existence_error}}</H1>
+                {% endif %}-->
+
+                <!--tabs section start-->
+                <br>
+
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        {% if not Searched == 'Yes' %}
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                            aria-controls="pills-home" aria-selected="true">Info</a>
+                        {% else %}
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                            aria-controls="pills-contact" aria-selected="false">Info</a>
+                        {% endif %}
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                            aria-controls="pills-profile" aria-selected="false">Add New Record</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        {% if Searched == 'Yes' %}
+                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                            aria-controls="pills-home" aria-selected="true">Update Record</a>
+                        {% else %}
+                        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab"
+                            aria-controls="pills-contact" aria-selected="false">Update Record</a>
+                        {% endif %}
+
+                    </li>
+
+
+
+
+                </ul>
+
+
+                <!-----------Info Content START------------>
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="tab-content" id="pills-tabContent">
+                            {% if not Searched == 'Yes' %}
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                aria-labelledby="pills-home-tab">
+                                {% else %}
+                                <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                                    aria-labelledby="pills-contact-tab">
+                                    {% endif %}
+                                    
+                                        <!-----------------------------------Search section-------------------------------------------->
+                                        <form method="POST"> {% csrf_token %}
+                                        <div class="input-group mb-3">
+                                            
+                                            {% if request_id == 'Search' %}
+                                            <input type="search" name="wo_id" class="form-control"
+                                                placeholder="Work-Order ID" aria-label="Recipient's username"
+                                                aria-describedby="button-addon2" style="max-width: 20rem;"
+                                                value="{{results.wo_id}}">
+                                            {% else %}
+                                            <input type="search" name="wo_id" class="form-control"
+                                                placeholder="Work-Order ID" aria-label="Recipient's username"
+                                                aria-describedby="button-addon2" style="max-width: 20rem;">
+                                            {% endif %}
+
+                                            {% if search_id == 'Search' %}
+                                            <input type="search" name="site_id" class="form-control ml-5"
+                                                placeholder="Site ID" aria-label="Recipient's username"
+                                                aria-describedby="button-addon2" style="max-width: 20rem;"
+                                                value="{{results.site_id}}">
+                                            {% else %}
+                                            <input type="search" name="site_id" class="form-control ml-5"
+                                                placeholder="Site ID" aria-label="Recipient's username"
+                                                aria-describedby="button-addon2" style="max-width: 20rem;">
+
+                                            {% endif %}
+
+                                            <button name="site_search" class="btn btn-outline-primary ml-5 "
+                                                type="submit" id="button-addon2">Search
+                                            </button>
+                                            {% if extract == "exist" %}
+                                            <!-- Button trigger modal -->
+                                            <button name="export_data" type="submit" class="btn btn-outline-success ml-3">
+                                                Extract Site History
+                                            </button>
+                                            {% endif %}
+                                            <!--Delete pop-up part-->
+                                            {% if userprivileges in crud %}
+                                            {% endif %}
+                                            {% if delete == "exist" %}
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger ml-3" data-toggle="modal"
+                                                data-target="#staticBackdrop">
+                                                Delete
+                                            </button>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="staticBackdrop" data-backdrop="static"
+                                                data-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">Warning!
+                                                            </h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete this record?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Cancel</button>
+                                                            <button name="delete_site" type="submit"
+                                                                class="btn btn-danger">Delete</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--Delete pop-up end-->
+                                            {% endif %}
+                                            </form>
+                                            <!--pop-up for the reports-->
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary ml-3" data-toggle="modal"
+                                                data-target="#staticBackdrop">
+                                                Launch Report Manager
+                                            </button>
+
+                                            <!-- Reports Modal -->
+                                            <form method="POST"> {% csrf_token %}
+                                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="staticBackdropLabel">Report
+                                                                    Manager</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                            
+                                                                <div class="col-sm-10">
+                                                                    <select class="form-control mb-3" name="region">
+                                                                        <option value="">Select Region</option>
+                                                                        <option value="Cairo">Cairo</option>
+                                                                        <option value="Alex">Alex</option>
+                                                                        <option value="Delta">Delta</option>
+                                                                        <option value="Giza">Giza</option>
+                                                                        <option value="Upper">Upper</option>
+                                            
+                                                                    </select>
+                                            
+                                                                </div>
+                                            
+                                                                <div class="col-sm-10">
+                                                                    <select class="form-control mb-3" name="project_name">
+                                                                        <option value="">Select Project</option>
+                                                                        <option value="H&S Requests">H&S Requests</option>
+                                                                        <option value="Redeployment(new S.S replacement)">
+                                                                            Redeployment(new S.S replacement)</option>
+                                                                        <option value="4*4 MIMO">4*4 MIMO</option>
+                                                                        <option value="SISO to MIMO">SISO to MIMO</option>
+                                                                        <option value="Fixed Accounts">Fixed Accounts
+                                                                        </option>
+                                                                        <option value="Civil Maintenance tasks">Civil
+                                                                            Maintenance tasks</option>
+                                                                        <option value="Down Sites tasks - L.O.S">Down Sites
+                                                                            tasks - L.O.S</option>
+                                                                        <option value="Adding new sector">Adding new sector
+                                                                        </option>
+                                                                        <option value="Modernization project">Modernization
+                                                                            project</option>
+                                                                        <option value="Sectroization project">Sectroization
+                                                                            project</option>
+                                                                        <option value="TE requests - reviewed">TE requests -
+                                                                            reviewed</option>
+                                                                        <option value="LTE (900,1800 &2100)">LTE (900,1800
+                                                                            &2100)</option>
+                                                                        <option value="Facing for new rollout sites">Facing
+                                                                            for new rollout sites</option>
+                                                                        <option value="U900">U900</option>
+                                                                        <option value="Sharing requests">Sharing requests
+                                                                        </option>
+                                                                        <option value="E-band">E-band</option>
+                                                                        <option value="SM request">SM request</option>
+                                                                        <option value="TX Expansion">TX Expansion</option>
+                                                                        <option value="Army & MOI requests">Army & MOI
+                                                                            requests</option>
+                                                                        <option value="L2600">L2600</option>
+                                                                    </select>
+                                                                </div>
+                                            
+                                                                <div class="col-sm-10">
+                                                                    <select class="form-control mb-3" name="consultant_name">
+                                                                        <option value="">Select Consultant</option>
+                                                                        <option value="mka">MKA</option>
+                                                                        <option value="idea">IDEA</option>
+                                                                        <option value="nv">NV</option>
+                                                                        <option value="gsec">GSEC</option>
+                                                                        <option value="civiltech">CivilTech</option>
+                                                                        <option value="badran">Badran</option>
+                                                                        <option value="otack">OTack</option>
+                                                                        <option value="rtc">RTC</option>
+                                                                    </select>
+                                                                </div>
+                                            
+                                            
+                                            
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" name="export_data" class="btn btn-primary">Download</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Back / Cancel</button>
+                                                            </div>
+                                                        </div>
+                                            
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <br>
+
+                                        <!------------------------------------Info section------------------------------------------->
+
+                                        <div class="form-group row">
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">SiteID</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    value="{{results.site_id}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Area</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{servant_app_results.region}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">RT
+                                                /GF</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{servant_app_results.site_type}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Structure
+                                                Type</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{servant_app_results.structure_type}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Height</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{servant_app_results.height}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Star
+                                                Site</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.star_site}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Requester</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.requester}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Requester
+                                                Dep.</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.requester_dept}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Mail
+                                                Name</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.mail_name}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Project
+                                                Name</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.project_name}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">New
+                                                Requirement</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.new_requirement}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-2">Employee
+                                                ID</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-4" id="colFormLabel"
+                                                    placeholder="{{results.employee_id}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Consultant
+                                                Name</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.consultant_name}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-3 col-form-label mb-3">Consultant
+                                                Recommendations</label>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.consultant_recommendations}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Feedback</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.feedback}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Action
+                                                Taken</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.action_taken}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Site
+                                                Status</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.site_status}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Building</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.building}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Max Rating
+                                                In:</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.max_rating_in}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Max Rating
+                                                %</label>
+                                            <div class="col-sm-4">
+                                                <input type="number" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.max_rating_per}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Status</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.status}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Request
+                                                Date</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.request_date}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Last Visit
+                                                Date</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.last_visit}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">In-Progress
+                                                Date</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{inprogress_date_str_info}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Done
+                                                Date</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{done_date_str_info}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Remarks</label>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control mb-3" id="colFormLabel"
+                                                    placeholder="{{results.remarks}}" disabled>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-----------Add Content START------------>
+
+                                {% if userprivileges in crud %}
+                                {% endif %}
+                                <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                    aria-labelledby="pills-profile-tab">
+                                    <form method="POST" name="addForm"> {% csrf_token %}
+                                        <div class="form-group row">
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">SiteID</label>
+                                            <div class="col-sm-4">
+                                                <input name="site_id" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="" required>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Area</label>
+                                            <div class="col-sm-4">
+                                                <input name="region" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="{{region}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">RT
+                                                /GF</label>
+                                            <div class="col-sm-4">
+                                                <input name="rt_gf" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="{{RT_GF}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Structure
+                                                Type</label>
+                                            <div class="col-sm-4">
+                                                <input name="structure_type" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="{{structure_type}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Height</label>
+                                            <div class="col-sm-4">
+                                                <input name="height" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="{{height}}" disabled>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Star
+                                                Site</label>
+                                            <div class="col-sm-4">
+                                                <input name="star_site" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="">
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Requester</label>
+                                            <div class="col-sm-4">
+                                                <input name="requester" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="" required>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Requester
+                                                Dep.</label>
+                                            <div class="col-sm-4">
+                                                <input name="requester_dept" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="" required>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Mail
+                                                Name</label>
+                                            <div class="col-sm-4">
+                                                <input name="mail_name" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="" required>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Project
+                                                Name</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control mb-3" name="project_name" required>
+                                                    <option value="">Select Project</option>
+                                                    <option value="H&S Requests">H&S Requests</option>
+                                                    <option value="Redeployment(new S.S replacement)">Redeployment(new
+                                                        S.S replacement)</option>
+                                                    <option value="4*4 MIMO">4*4 MIMO</option>
+                                                    <option value="SISO to MIMO">SISO to MIMO</option>
+                                                    <option value="Fixed Accounts">Fixed Accounts</option>
+                                                    <option value="Civil Maintenance tasks">Civil Maintenance tasks
+                                                    </option>
+                                                    <option value="Down Sites tasks - L.O.S">Down Sites tasks - L.O.S
+                                                    </option>
+                                                    <option value="Adding new sector">Adding new sector</option>
+                                                    <option value="Modernization project">Modernization project</option>
+                                                    <option value="Sectroization project">Sectroization project</option>
+                                                    <option value="TE requests - reviewed">TE requests - reviewed
+                                                    </option>
+                                                    <option value="LTE (900,1800 &2100)">LTE (900,1800 &2100)</option>
+                                                    <option value="Facing for new rollout sites">Facing for new rollout
+                                                        sites</option>
+                                                    <option value="U900">U900</option>
+                                                    <option value="Sharing requests">Sharing requests</option>
+                                                    <option value="E-band">E-band</option>
+                                                    <option value="SM request">SM request</option>
+                                                    <option value="TX Expansion">TX Expansion</option>
+                                                    <option value="Army & MOI requests">Army & MOI requests</option>
+                                                    <option value="L2600">L2600</option>
+                                                </select>
+
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">New
+                                                Requirement</label>
+                                            <div class="col-sm-4">
+                                                <input name="new_requirement" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="" required>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-2">Employee
+                                                ID</label>
+                                            <div class="col-sm-4">
+                                                <input name="employee_id" type="text" class="form-control mb-4"
+                                                    id="colFormLabel" placeholder="{{request.user.username}}" disabled>
+                                            </div>
+
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Consultant
+                                                Name</label>
+                                            <div class="col-sm-4">
+                                                <select class="form-control mb-3" name="consultant_name" required>
+                                                    <option value="">Select Consultant</option>
+                                                    <option value="mka">MKA</option>
+                                                    <option value="idea">IDEA</option>
+                                                    <option value="nv">NV</option>
+                                                    <option value="gsec">GSEC</option>
+                                                    <option value="civiltech">CivilTech</option>
+                                                    <option value="badran">Badran</option>
+                                                    <option value="otack">OTack</option>
+                                                    <option value="rtc">RTC</option>
+                                                </select>
+                                            </div>
+
+                                            <label for="colFormLabel" class="col-sm-3 col-form-label mb-3">Consultant
+                                                Recommendations</label>
+                                            <div class="col-sm-3">
+                                                <input name="consultant_recommendations" type="text"
+                                                    class="form-control mb-3" id="colFormLabel" placeholder="">
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Feedback</label>
+                                            <div class="col-sm-4">
+                                                <input name="feedback" type="date" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="">
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Action
+                                                Taken</label>
+                                            <div class="col-sm-4">
+                                                <input name="action_taken" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="">
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Site
+                                                Status</label>
+                                            <div class="col-sm-4">
+                                                <input name="site_case" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="">
+                                            </div>
+                                            <label for="colFormLabel"
+                                                class="col-sm-2 col-form-label mb-3">Building</label>
+                                            <div class="col-sm-4">
+                                                <input name="building" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="">
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Max Rating
+                                                In:</label>
+                                            <div class="col-sm-4">
+                                                <input name="max_rating_in" type="text" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="">
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Max Rating
+                                                %</label>
+                                            <div class="col-sm-4">
+                                                <input name="max_rating_per" type="number" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="">
+                                            </div>
+
+                                            <select class="form-control mb-3" name="status" required>
+                                                <option value="">Select Status</option>
+                                                <option value="in-progress">In-Progress</option>
+                                                <option value="On Hold">On Hold</option>
+
+                                            </select>
+
+                                            <input name="remarks" type="text" class="form-control mb-3"
+                                                id="colFormLabel" placeholder="Remarks">
+
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Request
+                                                Date</label>
+                                            <div class="col-sm-4">
+                                                <input name="request_date" type="date" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="" required>
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Last Visit
+                                                Date</label>
+                                            <div class="col-sm-4">
+                                                <input name="last_visit" type="date" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="">
+                                            </div>
+                                            <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">In-Progress
+                                                Date</label>
+                                            <div class="col-sm-4">
+                                                <input name="inprogress_date" type="date" class="form-control mb-3"
+                                                    id="colFormLabel" placeholder="{{inprogress_date}}" disabled>
+                                            </div>
+                                        </div>
+                                        <button name="add_new_site" type="submit"
+                                            class="btn btn-primary btn-block mb-3">Add
+                                            Site</button>
+                                    </form>
+
+                                </div>
+
+
+                                <!-----------Update Content START------------>
+
+                                {% if userprivileges in crud %}
+                                {% endif %}
+                                {% if Searched == 'Yes' %}
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
+                                    {% else %}
+                                    <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                                        aria-labelledby="pills-contact-tab">
+                                        {% endif %}
+
+                                        <form method="POST" name="updateForm"> {% csrf_token %}
+                                            <div class="input-group mb-3">
+                                                <input type="search" name="update_search_site_id" class="form-control"
+                                                    placeholder="Site ID" aria-label="Recipient's username"
+                                                    aria-describedby="button-addon2" style="max-width: 20rem;">
+                                                <button name="site_search_update" class="btn btn-outline-primary ml-5 "
+                                                    type="submit" id="button-addon2">Search
+                                                </button>
+                                            </div>
+                                        </form>
+                                        <form method="POST" id="updateForm"> {% csrf_token %}
+                                            {% if update_results %}
+                                            <div class="form-group row">
+                                                <label for="colFormLabel"
+                                                    class="col-sm-2 col-form-label mb-3">SiteID</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_site_id" type="text" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{update_results.site_id}}" disabled>
+                                                    <input name="update_site_id_hidden" type="text"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{update_results.site_id}}" hidden>
+                                                </div>
+                                                <label for="colFormLabel"
+                                                    class="col-sm-2 col-form-label mb-3">Area</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_region" type="text" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{update_servant_app_results.region}}"
+                                                        disabled>
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">RT
+                                                    /GF</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_rt_gf" type="text" class="form-control mb-3"
+                                                        id="colFormLabel"
+                                                        value="{{update_servant_app_results.site_type}}" disabled>
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Structure
+                                                    Type</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_structure_type" type="text"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{update_servant_app_results.structure_type}}" disabled>
+                                                </div>
+                                                <label for="colFormLabel"
+                                                    class="col-sm-2 col-form-label mb-3">Height</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_height" type="text" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{update_servant_app_results.height}}"
+                                                        disabled>
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Star
+                                                    Site</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_star_site" type="text" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{update_results.star_site}}">
+                                                </div>
+                                                <label for="colFormLabel"
+                                                    class="col-sm-2 col-form-label mb-3">Requester</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_requester" type="text" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{update_results.requester}}">
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Requester
+                                                    Dep.</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_requester_dept" type="text"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{update_results.requester_dept}}">
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Mail
+                                                    Name</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_mail_name" type="text" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{update_results.mail_name}}">
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Project
+                                                    Name</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control mb-3" name="project_name" required>
+                                                        <option value="{{update_results.project_name}}">
+                                                            {{update_results.project_name}}</option>
+                                                        <option value="H&S Requests">H&S Requests</option>
+                                                        <option value="Redeployment(new S.S replacement)">
+                                                            Redeployment(new S.S replacement)</option>
+                                                        <option value="4*4 MIMO">4*4 MIMO</option>
+                                                        <option value="SISO to MIMO">SISO to MIMO</option>
+                                                        <option value="Fixed Accounts">Fixed Accounts</option>
+                                                        <option value="Civil Maintenance tasks">Civil Maintenance tasks
+                                                        </option>
+                                                        <option value="Down Sites tasks - L.O.S">Down Sites tasks -
+                                                            L.O.S</option>
+                                                        <option value="Adding new sector">Adding new sector</option>
+                                                        <option value="Modernization project">Modernization project
+                                                        </option>
+                                                        <option value="Sectroization project">Sectroization project
+                                                        </option>
+                                                        <option value="TE requests - reviewed">TE requests - reviewed
+                                                        </option>
+                                                        <option value="LTE (900,1800 &2100)">LTE (900,1800 &2100)
+                                                        </option>
+                                                        <option value="Facing for new rollout sites">Facing for new
+                                                            rollout sites</option>
+                                                        <option value="U900">U900</option>
+                                                        <option value="Sharing requests">Sharing requests</option>
+                                                        <option value="E-band">E-band</option>
+                                                        <option value="SM request">SM request</option>
+                                                        <option value="TX Expansion">TX Expansion</option>
+                                                        <option value="Army & MOI requests">Army & MOI requests</option>
+                                                        <option value="L2600">L2600</option>
+                                                    </select>
+                                                    <!--<input name="update_project_name" type="text" class="form-control mb-3"
+                                                id="colFormLabel" value="">-->
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">New
+                                                    Requirement</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_new_requirement" type="text"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{update_results.new_requirement}}">
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-2">Employee
+                                                    ID</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_employee_id" type="text"
+                                                        class="form-control mb-4" id="colFormLabel"
+                                                        value="{{update_results.employee_id}}" disabled>
+                                                </div>
+
+                                                <label for="colFormLabel"
+                                                    class="col-sm-2 col-form-label mb-3">Consultant
+                                                    Name</label>
+                                                <div class="col-sm-4">
+                                                    <select class="form-control mb-3" name="consultant_name" required>
+                                                        <option value="{{update_results.consultant_name}}">
+                                                            {{update_results.consultant_name}}</option>
+                                                        <option value="mka">MKA</option>
+                                                        <option value="idea">IDEA</option>
+                                                        <option value="nv">NV</option>
+                                                        <option value="gsec">GSEC</option>
+                                                        <option value="civiltech">CivilTech</option>
+                                                        <option value="badran">Badran</option>
+                                                        <option value="otack">OTack</option>
+                                                        <option value="rtc">RTC</option>
+                                                    </select>
+                                                </div>
+
+                                                <label for="colFormLabel"
+                                                    class="col-sm-3 col-form-label mb-3">Consultant
+                                                    Recommendations</label>
+                                                <div class="col-sm-3">
+                                                    <input name="update_consultant_recommendations" type="text"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{update_results.consultant_recommendations}}">
+                                                </div>
+                                                <label for="colFormLabel"
+                                                    class="col-sm-2 col-form-label mb-3">Feedback</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_feedback" type="date" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{feedback_date_str_update}}" required>
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Action
+                                                    Taken</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_action_taken" type="text"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{update_results.action_taken}}">
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Site
+                                                    Status</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_site_case" type="text" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{update_results.site_status}}">
+                                                </div>
+                                                <label for="colFormLabel"
+                                                    class="col-sm-2 col-form-label mb-3">Building</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_building" type="text" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{update_results.building}}">
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Max
+                                                    Rating
+                                                    In:</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_max_rating_in" type="text"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{update_results.max_rating_in}}">
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Max
+                                                    Rating
+                                                    %</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_max_rating_per" type="number"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{update_results.max_rating_per}}">
+                                                </div>
+                                                <select class="form-control mb-3" name="update_status" id="updateStatus"
+                                                    onchange="setFieldsToRequired();" required>
+                                                    <option value="">Select Status</option>
+                                                    <option value="{{update_results.status}}">{{update_results.status}}
+                                                    </option>
+                                                    <option value="done">Done</option>
+                                                </select>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Request
+                                                    Date</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_request_date" type="date"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{request_date_str_update}}" required>
+                                                </div>
+                                                <label for="colFormLabel" class="col-sm-2 col-form-label mb-3">Last
+                                                    Visit
+                                                    Date</label>
+                                                <div class="col-sm-4">
+                                                    <input name="update_last_visit" type="date"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{last_visit_date_str_update}}" required>
+                                                </div>
+                                                <label for="colFormLabel"
+                                                    class="col-sm-2 col-form-label mb-3">In-Progress
+                                                    Date</label>
+                                                <div class="col-sm-10">
+                                                    <input name="update_inprogress_date" type="text"
+                                                        class="form-control mb-3" id="colFormLabel"
+                                                        value="{{inprogress_date_str_update}}" disabled>
+                                                </div>
+                                                <label for="colFormLabel"
+                                                    class="col-sm-2 col-form-label mb-3">Remarks</label>
+                                                <div class="col-sm-10">
+                                                    <input name="update_remarks" type="text" class="form-control mb-3"
+                                                        id="colFormLabel" value="{{update_results.remarks}}">
+                                                </div>
+                                            </div>
+                                            <button name="update_new_site" type="submit"
+                                                class="btn btn-success btn-block mb-3">Update
+                                                Site</button>
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!----------core content End----------->
+
+                    </div>
+                </div>
+
+                <!--full screen container END-->
+
+                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+                    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+                    crossorigin="anonymous">
+                    </script>
+                <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+                    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+                    crossorigin="anonymous">
+                    </script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+                    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+                    crossorigin="anonymous">
+                    </script>
+                <!--custom jquery-->
+                <!-- <script src="../static/jquery/jquery.js"></script> -->
+                <script src="{% static 'js/ro_main.js' %}"></script>
+                <script src="{% static 'js/civil_tech.js' %}"></script>
+                <!--custom jquery END-->
+</body>
+
+</html>

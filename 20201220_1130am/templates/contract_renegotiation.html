@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='icon' href='../static/img/favicon.ico' type='image/x-icon' />
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    
+    <title>RO - Contract Renegotiation</title>
+
+</head>
+
+<body>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <nav class="navbar navbar-dark bg-dark">
+                    <a class="navbar-brand" href="/welcome/">RO PLATFORM</a>
+                    <div class="spinner-border text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <div class="">
+                        <h3 style="color: white">Contract Renegotiation</h3>
+                    </div>
+                    
+                    <form class="form-inline">
+                        <button onclick="window.location.href='/logout/'" name="logout" class="btn btn-outline-warning my-2 my-sm-0" type="button">Logout</button>
+                        <a href="https://web.vodafone.com.eg/en/home" target="_blank"><img src="../static/img/logo.png" width="60" height="45" class="d-inline-block align-top" alt="vf"></a>
+                    </form>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <!--nav bar End-->
+<!--------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <!--Main Row which is the full screen container-->
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <!--------------Side Menu START-------------->
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action" disabled>Welcome {{username}}</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Dashboard</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Query</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Technical Plan</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Integration Quota</button>
+                    <button type="button" onclick="window.location.href='/site_history/'" class="list-group-item list-group-item-action">Site History</button>
+                    <button type="button" onclick="window.location.href='/contract_renegotiation/'" class="list-group-item list-group-item-action active"><strong>Contract Renegotiation</strong></button>
+                    <button type="button" onclick="window.location.href='/site_continuity_risk/'" class="list-group-item list-group-item-action">Site Continuity</button>
+                    <button type="button" onclick="window.location.href='/pki/'" class="list-group-item list-group-item-action">PKI Search/Add</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Smart Check-List</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Contractor Evaluation</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Contractor Allocation</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Field Planning</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">RCA Acceptance</button>
+                    <button type="button" onclick="window.location.href='/nfm_crca/'" class="list-group-item list-group-item-action">RCA NFM</button>
+                    <button type="button" onclick="window.location.href='/civil_tech/'" class="list-group-item list-group-item-action">Civil Technical Office</button>
+                    <button type="button" onclick="window.location.href='/under_construction/'" class="list-group-item list-group-item-action">Unified PWR DB</button>
+                </div>
+                <!--------------Side Menu END-------------->
+            </div>
+            <div class="col-sm-10">
+                <!-----------Core Content START------------>
+                
+                    <div class="row">
+                            <div class="col-sm-8">
+                                <br>
+
+                                <!--Site search-->
+								<form method="POST">	{% csrf_token %}
+                                <input class="form-control mr-sm-2" type="search" name="site_id" placeholder="Search for Site ID" aria-label="Search">
+                                <button name="single_search" class="btn btn-outline-primary my-2 my-sm-2" type="submit" >Search</button>
+                                <button class="btn btn-outline-primary my-2 my-sm-2 d-none" type="submit">Contact RO SPOC</button>
+
+                                {% if site_search_msg == "incorrect" %}
+                                <!--Site search error message-->
+                                <div class="alert bg-danger text-white alert-dismissible fade show" role="alert">
+                                    <strong>Error!</strong> Site not found.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                {% endif  %}
+
+                                {% if region_search_msg == "incorrect" %}
+                                <!--Site region error message-->
+                                <div class="alert bg-danger text-white alert-dismissible fade show" role="alert">
+                                    <strong>Error!</strong> Wrong Region, please try another site within your Region.
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                {% endif  %}
+
+                                </form>
+                                <br>
+								<h5 style="color:brown">General Info</h5>
+                                <form method="POST">	{% csrf_token %}
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">SiteID</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{site_id}}" disabled>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Option</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{option}}" disabled>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Region</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{region}}" disabled>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Sub-Region</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{sub_region}}" disabled>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Structure Type</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{structure_type}}" disabled>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Site Type</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{site_type}}" disabled>
+                                        </div>
+                                    </div>
+                                </form>
+                                <h5 style="color:brown">Criticality</h5>
+                                <form method="POST">	{% csrf_token %}
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Rank</label>
+                                        <div class="col-sm-4">
+                                            <button type="text" class="form-control {% if rank == 'High' %} bg-danger text-white {% elif rank == 'Critical' %} bg-danger text-white {% endif %};" id="colFormLabel" placeholder="" disabled>{{rank}}</button>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label"># of Cascaded Sites</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{cascaded_sites|floatformat:'0'}}" disabled>
+                                        </div>
+                                    </div>
+                                </form>
+                                <h5 style="color:brown">Renegotiation Info</h5>
+                                <form method="POST">	{% csrf_token %}
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Contract Start Date</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{System_Start_Date|date:'d N Y'}}" disabled>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Contract End Date</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{System_End_Date|date:'d N Y'}}" disabled>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Last Payment Start Date</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{Calc_From|date:'d N Y'}}" disabled>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Last Payment End Date</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{Calc_To|date:'d N Y'}}" disabled>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Last Payment(EGP)</label>
+                                        <div class="col-sm-4">
+                                            <button type="text" class="form-control {% if Last_Rent > cl_avg_rent %} bg-danger text-white {% endif %}" id="colFormLabel" placeholder="" disabled>{{Last_Rent|floatformat:'2'}} EGP</button>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Expected Re-Newal(EGP)</label>
+                                        <div class="col-sm-4">
+                                            <button type="text" class="form-control {% if Expected_Payment > cl_avg_rent %} bg-danger text-white {% endif %}" id="colFormLabel" placeholder="" disabled>{{Expected_Payment}} EGP</button>
+                                        </div>
+                                        <label for="colFormLabel" class="col-sm-2 col-form-label">Area Average(EGP)</label>
+                                        <div class="col-sm-4">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="{{cl_avg_rent|floatformat:'2'}} EGP" disabled>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-4">
+                                <br>
+                                <div class="mapouter">
+                                    <div class="gmap_canvas"><iframe width="500" height="750" id="gmap_canvas" src="{{map}}" frameborder="0"
+                                            scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+                                            href="https://www.embedgooglemap.net/blog/elementor-review/">elementor pro
+                                            pack</a></div>
+                                    <style>
+                                        .mapouter {
+                                            position: relative;
+                                            text-align: right;
+                                            height: 750px;
+                                            width: 500px;
+                                        }
+                                
+                                        .gmap_canvas {
+                                            overflow: hidden;
+                                            background: none !important;
+                                            height: 750px;
+                                            width: 500px;
+                                        }
+                                    </style>
+                                </div>
+
+                                <!--Admin Section Start-->
+                                {% if userprivileges in cru %}
+
+                                <h5>Admin Controls</h5>
+                                <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" name="myfile" class="custom-file-input" id="file_input"
+                                                oninput="input_filename();" accept="excel/*" required>
+                                            <label class="custom-file-label" for="file_input" name="myfile"
+                                                id="file_input_label">Select file</label>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline-primary my-2 my-sm-2" name="crq_update"
+                                        type="submit">Update Database</button>
+                                    {% if reno_admin_msg == "success" %}
+
+                                    <!--Success message-->
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>Success!</strong> Database is updated successfully.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    {% elif reno_admin_msg == "error" %}
+
+                                    <!--Error message-->
+                                    <div class="alert alert alert-dismissible fade show bg-danger" role="alert"
+                                        style="color: white;">
+                                        <strong>Error!</strong> Please check your file and try again.
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    {% endif  %}
+                                </form>
+                                {% endif  %}
+
+                                <!--Admin Section End-->
+                            </div>
+                    </div>
+
+                <!-----------Core Content END------------>
+            </div>
+            <!--core content End-->
+        </div>
+    </div>
+    
+    <!--full screen container END-->
+
+    <!-- Optional JavaScript -->
+
+    <script>
+
+        var input = document.getElementById("file_input")
+        var file_input_label = document.getElementById("file_input_label")
+        function input_filename(){
+            file_input_label.innerText = input.files[0].name;
+        }
+        function upload() {   
+            var file = input.files[0];        
+            var filename = file.name;
+            data.append('file', file);            
+        } 
+        function reset() {  
+            file_input_label.innerText = "Select file";
+        }
+
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    
+    <!--custom jquery-->
+    
+    <script src="../static/jquery/jquery.js"></script>
+    <script>
+        $(window).on("load", function () {
+            $(".spinner-border").fadeOut("slow")
+        });
+    </script>
+
+    <!--custom jquery END-->
+
+</body>
+
+</html>
+
+
+
+<!--
+
+<div class="list-group">
+    <button type="button" class="list-group-item list-group-item-action" disabled>Welcome {{username}}</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>Dashboard</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>Query</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>Technical Plan</button>
+    <button type="button" class="list-group-item list-group-item-action">Site History</button>
+    <button type="button" class="list-group-item list-group-item-action">Contract Renegotiation</button>
+    <button type="button" class="list-group-item list-group-item-action">Site Continuity</button>
+    <button type="button" class="list-group-item list-group-item-action">PKI Search/Add</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>Smart Check-List</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>Contractor Evaluation</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>Contractor Allocation</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>Field Planning</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>RCA Acceptance</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>RCA NFM</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>Civil Technical Office</button>
+    <button type="button" class="list-group-item list-group-item-action" disabled>Unified PWR DB</button>
+</div>
+
+
+
+
+-->

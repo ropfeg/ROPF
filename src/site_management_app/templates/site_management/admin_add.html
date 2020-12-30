@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sm_admin</title>
+</head>
+<body>
+                            <h5>Administrator</h5>
+
+                            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="crqfile" class="custom-file-input" id="file_input"
+                                            oninput="input_filename();">
+                                        <label class="custom-file-label" for="file_input" id="file_input_label">Select CRQ file</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-primary my-2 my-sm-2" name="crq_update" type="submit">Update CRQs</button>
+                                {% if admin_result == "correct" %}
+                                <h6 class="d-inline text-secondary">&nbsp;&nbsp; Success.</h6>
+                                {% endif %}
+                            </form>
+                            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" name="myfile" class="custom-file-input" id="file_input"
+                                            oninput="input_filename();">
+                                        <label class="custom-file-label" name="myfile" for="file_input" id="file_input_label">Select DB update file</label>
+                                    </div>
+                                </div>
+                                <button class="btn btn-outline-primary my-2 my-sm-2" name="src_update" type="submit">Update SRC DB</button>
+                                <button class="btn btn-outline-primary my-2 my-sm-2" name="admin_batch_add" type="submit">Update Interaction DB</button>
+                                <a class="btn btn-outline-primary my-2 my-sm-2" href='../static/Sample_Template/inter_DB_reqtype222.xlsx'>Download Inter DB Template</a>
+
+                                <h6 class="d-inline text-secondary">&nbsp;&nbsp; {{update_src_db_result}}.</h6>
+
+                            <br>
+                            <form method="post" enctype="multipart/form-data">{% csrf_token %}
+                                <button type="button" onclick="window.location.href='/export/requested/'" class="btn btn-outline-primary my-2 my-sm-2">Export Requests</button>
+                                <button type="button" onclick="window.location.href='/export/all/'" class="btn btn-outline-primary my-2 my-sm-2">Export All Inter DB</button>
+                            </form>
+</body>
+</html>

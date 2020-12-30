@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='icon' href='../static/img/favicon.ico' type='image/x-icon' />
+
+    <!-- Bootstrap CSS -->
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Contractor Evaluation</title>
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-dark bg-dark">
+            <a class="navbar-brand" href="/welcome/">RO PLATFORM</a>
+            <div class="spinner-border text-light" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+            <div class="">
+                <h3 style="color: white">Contractor Score</h3>
+            </div>
+
+            <form class="form-inline">
+                <button onclick="window.location.href='/logout/'" name="logout"
+                    class="btn btn-outline-warning my-2 my-sm-0" type="button">Logout</button>
+                <a href="https://web.vodafone.com.eg/en/home" target="_blank"><img src="../static/img/logo.png"
+                        width="60" height="45" class="d-inline-block align-top" alt="vf"></a>
+            </form>
+        </nav>
+    </div>
+
+    <!--nav bar End-->
+
+
+    <!--Main Row which is the full screen container-->
+
+    <div class="row">
+        <div class="col-12">
+
+            <!--the row which holds the rest of the screen content (core content)-->
+
+            <div class="row">
+                <div class="col-2">
+                    <div class="container-fluid">
+                        <div class="list-group">
+                            <button type="button" class="list-group-item list-group-item-action" disabled>Welcome
+                                {{username}}</button>
+                            <button type="button" onclick="window.location.href='/dashboard/'"
+                                class="list-group-item list-group-item-action">Dashboard</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'"
+                                class="list-group-item list-group-item-action">Query</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'"
+                                class="list-group-item list-group-item-action">Technical Plan</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'"
+                                class="list-group-item list-group-item-action">Integration Quota</button>
+                            <button type="button" onclick="window.location.href='/site_history/'"
+                                class="list-group-item list-group-item-action">Site History</button>
+                            <button type="button" onclick="window.location.href='/contract_renegotiation/'"
+                                class="list-group-item list-group-item-action">Contract Renegotiation</button>
+                            <button type="button" onclick="window.location.href='/site_continuity_risk/'"
+                                class="list-group-item list-group-item-action">Site Continuity</button>
+                            <button type="button" onclick="window.location.href='/pki/'"
+                                class="list-group-item list-group-item-action">PKI Search/Add</button>
+                            <button type="button" onclick="window.location.href='/contractor_evaluation/'"
+                                class="list-group-item list-group-item-action">Smart Check-List</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'"
+                                class="list-group-item list-group-item-action active"><strong>Contractor
+                                    Evaluation</strong></button>
+                            <button type="button" onclick="window.location.href='/under_construction/'"
+                                class="list-group-item list-group-item-action">Contractor Allocation</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'"
+                                class="list-group-item list-group-item-action">Field Planning</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'"
+                                class="list-group-item list-group-item-action">RCA Acceptance</button>
+                            <button type="button" onclick="window.location.href='/nfm_crca/'"
+                                class="list-group-item list-group-item-action">RCA NFM</button>
+                            <button type="button" onclick="window.location.href='/civil_tech/'"
+                                class="list-group-item list-group-item-action">Civil Technical Office</button>
+                            <button type="button" onclick="window.location.href='/under_construction/'"
+                                class="list-group-item list-group-item-action">Unified PWR DB</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--core content section-->
+
+                <div class="col-10">
+                    <br>
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                                role="tab" aria-controls="pills-home" aria-selected="true">Contractors Scoring</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+                                role="tab" aria-controls="pills-profile" aria-selected="false">Final Score</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact"
+                                role="tab" aria-controls="pills-contact" aria-selected="false">Data Management</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <div class="row">
+                                <div class="col-1">
+                                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                        aria-orientation="vertical">
+                                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill"
+                                            href="#v-pills-home" role="tab" aria-controls="v-pills-home"
+                                            aria-selected="true">CIVIL</a>
+                                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill"
+                                            href="#v-pills-profile" role="tab" aria-controls="v-pills-profile"
+                                            aria-selected="false">TELECOM</a>
+                                    </div>
+                                </div>
+                                <div class="col-11">
+
+                                    <!-- ------------------------Civil Scoring Part----------------- -->
+
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                            aria-labelledby="v-pills-home-tab">
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Alan"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Alkan"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Ascendem"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Citex"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="DeTel"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="G.Enviro"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="HOI"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Integra"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Land Mark"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="MERC"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="NewEra"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="O.Reporter"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="SignTel"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+
+                                        </div>
+
+                                        <!-- ------------------------Telecom Scoring Part----------------- -->
+
+
+                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                                            aria-labelledby="v-pills-profile-tab">
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="In-House"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Alkan"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Ascendem"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Citex"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="DeTel"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="G.Enviro"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="HOI"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Integra"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Land Mark"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="MERC"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="NewEra"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="O.Reporter"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="SignTel"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="TeleTrust"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Ericsson"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="Huawei"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                            <form class="mb-2">
+                                                <div class="form-row">
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control" placeholder="SIAE"
+                                                            disabled>
+                                                    </div>
+                                                    <div class="col-1">
+                                                        <input type="text" class="form-control text-center" placeholder="Score" min="0" max="5" step="0.5" required>
+                                                    </div>
+                                                    <div class="col-9">
+                                                        <input type="text" class="form-control" placeholder="Comment" {% if score < 3 %} required {% endif %}>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!-- ----------------------------------Final Score section-------------------------------------------------------------------------------- -->
+
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                            aria-labelledby="pills-profile-tab">
+                            <div class="row row-cols-1 row-cols-md-5">
+                                <div class="col mb-4">
+                                  <div class="card border-dark mb-3">
+                                    <div class="card-header"><h5>Alan</h5></div>  
+                                    <div class="card-body">
+                                      <p class="card-text">Rollout - {{alan_ro_score}} / {{alan_ro_rank}}</p>
+                                      <p class="card-text">Civil Upgrades - {{alan_civ_upg_score}} / {{alan_civ_upg_rank}}</p>
+                                      <p class="card-text">Telecom Services - {{alan_tel_score}} / Rank {{alan_tel_rank}}</p>
+                                      <p class="card-text">Civil Enhancement - {{alan_civ_enh_score}} / Rank {{alan_civ_enh_rank}}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col mb-4">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Alkan</h5>
+                                      <p class="card-text">Text</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col mb-4">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Ascendem</h5>
+                                      <p class="card-text">Text</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col mb-4">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <h5 class="card-title">Citix</h5>
+                                      <p class="card-text">Text</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col mb-4">
+                                    <div class="card">
+                                      <div class="card-body">
+                                        <h5 class="card-title">DeTel</h5>
+                                        <p class="card-text">Text</p>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+<!-- ----------------------------------Data Management section-------------------------------------------------------------------------------- -->
+
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                            aria-labelledby="pills-contact-tab">
+                            Data management here
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    
+        <!--core content End-->
+    </div>
+    <!--full screen container END-->
+
+    <!--Font Awsome-->
+    <script src="https://kit.fontawesome.com/4eac5aef8d.js" crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <script src=""></script>
+
+    <!--custom jquery-->
+
+    <script src="../static/jquery/jquery.js"></script>
+    <script>
+        $(window).on("load", function () {
+            $(".spinner-border").fadeOut("slow")
+        });
+    </script>
+
+    <!--custom jquery END-->
+
+</body>
+
+</html>
